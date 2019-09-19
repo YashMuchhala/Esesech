@@ -16,7 +16,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  String result;
+  String result = "start";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,7 +30,10 @@ class _MyAppState extends State<MyApp> {
                   child: Text("CMD"),
                   onPressed: () async {
                     
-                    SshService.executeCommand("ec2-13-234-30-69.ap-south-1.compute.amazonaws.com", "ls");
+                    String _result = await SshService.executeCommand("ec2-13-234-30-69.ap-south-1.compute.amazonaws.com", "ls");
+                    setState(() {
+                      result = _result;
+                    });
                   },
                 ),
                 Text(result),
