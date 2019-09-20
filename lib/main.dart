@@ -16,7 +16,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  String result = "start";
+  TextEditingController _controller = TextEditingController();
+  String result = "Start";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,11 +27,12 @@ class _MyAppState extends State<MyApp> {
           child: Center(
             child: Column(
               children: <Widget>[
+                TextField(),
                 RaisedButton(
-                  child: Text("CMD"),
+                  child: Text("RUN CMD"),
                   onPressed: () async {
                     
-                    String _result = await SshService.executeCommand("ec2-13-234-30-69.ap-south-1.compute.amazonaws.com", "ls");
+                    String _result = await SshService.executeCommand("ec2-13-234-30-69.ap-south-1.compute.amazonaws.com", "cat myfile.txt");
                     setState(() {
                       result = _result;
                     });

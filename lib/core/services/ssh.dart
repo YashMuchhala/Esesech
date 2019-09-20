@@ -1,24 +1,27 @@
 import 'package:ssh/ssh.dart';
 
 class SshService {
+
+  static const String _HOST = "ec2-13-235-243-163.ap-south-1.compute.amazonaws.com";
+  static const String _USERNAME = "ubuntu";
+  static const int _PORT = 22;
+  static const String _PASSWORD = "ubuntu123";
   static Future<String> executeCommand(String host, String command) async {
-    try {
       SSHClient client = SSHClient(
-        host: "ec2-13-234-30-69.ap-south-1.compute.amazonaws.com",
-        username: "ubuntu",
-        port: 22,
-        passwordOrKey: {
-          "privateKey":
-              "d0:1a:96:37:61:8d:f1:99:d3:9f:fd:05:93:9d:a4:0a:ae:52:ea:d8",
-          "passphrase": "",
-        },
+        host: _HOST,
+        username: _USERNAME,
+        port: _PORT,
+        passwordOrKey: _PASSWORD,
       );
+    try {
 
       await client.connect();
       String result = await client.execute(command);
+      await client.disconnect();
       return result;
     } catch (e) {
       print("SSH Exception Occurred: $e");
+      await client.disconnect();
       return null;
     }
   }
