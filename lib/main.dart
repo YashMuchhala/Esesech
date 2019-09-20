@@ -1,49 +1,21 @@
-import 'package:esesech/core/services/ssh.dart';
 import 'package:flutter/material.dart';
 
 import 'locator.dart';
+import 'ui/views/home.dart';
 
 void main() {
   setupLocator();
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  // This widget is the root of your application.
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-
-  TextEditingController _controller = TextEditingController();
-  String result = "Start";
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Esesech',
-      home: Scaffold(
-        body: Container(
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                TextField(),
-                RaisedButton(
-                  child: Text("RUN CMD"),
-                  onPressed: () async {
-                    
-                    String _result = await SshService.executeCommand("ec2-13-234-30-69.ap-south-1.compute.amazonaws.com", "cat myfile.txt");
-                    setState(() {
-                      result = _result;
-                    });
-                  },
-                ),
-                Text(result),
-              ],
-            ),
-          ),
-        ),
-      ),
+      color: Colors.black,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(brightness: Brightness.dark),
+      home: HomeView(),
     );
   }
 }
