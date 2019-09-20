@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
 
-import 'package:esesech/core/viewmodels/home.dart';
-import 'package:esesech/ui/views/base.dart';
+import 'base.dart';
+import 'home/dashboard.dart';
+import 'home/shell.dart';
+import 'home/users.dart';
+import '../../core/viewmodels/home.dart';
 
 class HomeView extends StatelessWidget {
+  final List<Widget> tabScreens = <Widget>[
+    Center(
+      child: DashboardView(),
+    ),
+    Center(
+      child: UsersView(),
+    ),
+    Center(
+      child: ShellView(),
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return BaseView<HomeViewModel>(
       builder: (BuildContext context, HomeViewModel model, Widget child) {
         return Scaffold(
-          body: model.tabScreens.elementAt(model.tabIndex),
+          body: tabScreens.elementAt(model.tabIndex),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: model.tabIndex,
             items: <BottomNavigationBarItem>[
