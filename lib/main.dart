@@ -1,7 +1,7 @@
+import 'package:esesech/ui/router.dart';
 import 'package:flutter/material.dart';
 
 import 'locator.dart';
-import 'ui/views/home.dart';
 
 void main() {
   setupLocator();
@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
       color: Colors.black,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(brightness: Brightness.dark),
-      home: HomeView(),
+      initialRoute: '/home',
+      onGenerateRoute: Router.generateRoute,
     );
   }
 }

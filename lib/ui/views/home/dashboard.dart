@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-class DashboardView extends StatelessWidget {
+class HomeDashboardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

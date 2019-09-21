@@ -1,3 +1,4 @@
+import 'package:esesech/ui/views/home/users/settings.dart';
 import 'package:flutter/material.dart';
 
 import 'package:esesech/core/constants/route_path.dart';
@@ -8,6 +9,8 @@ class Router {
     switch (settings.name) {
       case RoutePath.HOME:
         return MaterialPageRoute(builder: (_) => HomeView());
+      case RoutePath.USER_SETTINGS:
+        return MaterialPageRoute(builder: (_) => HomeUsersSettingsView());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

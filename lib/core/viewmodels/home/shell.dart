@@ -1,19 +1,21 @@
-import 'package:esesech/core/services/ssh.dart';
 import 'package:flutter/material.dart';
 
 import '../base.dart';
+import '../../constants/enums.dart';
+import '../../services/ssh.dart';
 
-class ShellViewModel extends BaseViewModel {
+class HomeShellViewModel extends BaseViewModel {
   int commandNumber = 0;
   List<String> shellCommands = [];
   List<String> shellResults = [];
 
-  ShellViewModel() {
+  HomeShellViewModel() {
     shellCommands.add("First command");
     shellResults.add("First result");
     commandNumber++;
   }
   Future<void> sendCommand(TextEditingValue value) async {
+    setState(ViewModelState.Busy);
     String command = value.text;
 
     shellCommands.add(command);
@@ -21,10 +23,11 @@ class ShellViewModel extends BaseViewModel {
     try {
       String result = await SshHelper.execute(command);
       shellResults.add(result);
-      notifyListeners();
+      setState(ViewModelState.Idle);
     } catch (e) {
-      shellResults.add("No output");
-      notifyListeners();
+      shellResults.add("APP ERROR: $e");
+      setState(ViewModelState.Idle);
+    
     }
   }
 }

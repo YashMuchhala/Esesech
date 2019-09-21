@@ -1,25 +1,27 @@
+import 'package:esesech/core/constants/enums.dart';
 import 'package:flutter/material.dart';
 
 import '../base.dart';
 import '../../../core/viewmodels/home/shell.dart';
 
-class ShellView extends StatefulWidget {
+class HomeShellView extends StatefulWidget {
   @override
-  _ShellViewState createState() => _ShellViewState();
+  _HomeShellViewState createState() => _HomeShellViewState();
 }
 
-class _ShellViewState extends State<ShellView> {
+class _HomeShellViewState extends State<HomeShellView> {
   final TextEditingController _commandTextController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return BaseView<ShellViewModel>(
-      builder: (BuildContext context, ShellViewModel model, Widget child) {
+    return BaseView<HomeShellViewModel>(
+      builder: (BuildContext context, HomeShellViewModel model, Widget child) {
         return _buildUI(context, model);
       },
     );
   }
 
-  Widget _buildUI(BuildContext context, ShellViewModel model) {
+  Widget _buildUI(BuildContext context, HomeShellViewModel model) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
@@ -27,10 +29,10 @@ class _ShellViewState extends State<ShellView> {
           child: Container(
             color: Colors.black,
             child: ListView.builder(
-              reverse: true,
+              shrinkWrap: true,
+              reverse: false,
               itemBuilder: (BuildContext context, int index) {
-                // Get elements from last
-                index = (model.commandNumber - 1) - index;
+                // // Get elements from last
                 return Container(
                   padding:
                       EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -74,11 +76,15 @@ class _ShellViewState extends State<ShellView> {
                   controller: _commandTextController,
                 ),
               ),
-              RaisedButton(
-                  child: Text("Run cmd"),
-                  onPressed: () async {
-                    await model.sendCommand(_commandTextController.value);
-                  }),
+              Container(
+                child: model.state == ViewModelState.Busy
+                    ? CircularProgressIndicator()
+                    : RaisedButton(
+                        child: Text("Run cmd"),
+                        onPressed: () async {
+                          await model.sendCommand(_commandTextController.value);
+                        }),
+              ),
             ],
           ),
         ),

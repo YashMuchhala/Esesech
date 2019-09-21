@@ -9,13 +9,13 @@ import '../../core/viewmodels/home.dart';
 class HomeView extends StatelessWidget {
   final List<Widget> tabScreens = <Widget>[
     Center(
-      child: DashboardView(),
+      child: HomeDashboardView(),
     ),
     Center(
-      child: UsersView(),
+      child: HomeUsersView(),
     ),
     Center(
-      child: ShellView(),
+      child: HomeShellView(),
     ),
   ];
   @override
