@@ -9,7 +9,7 @@ class ShellView extends StatefulWidget {
 }
 
 class _ShellViewState extends State<ShellView> {
-  final TextEditingController _commandController = TextEditingController();
+  final TextEditingController _commandTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BaseView<ShellViewModel>(
@@ -20,29 +20,69 @@ class _ShellViewState extends State<ShellView> {
   }
 
   Widget _buildUI(BuildContext context, ShellViewModel model) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            child: Container(),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Expanded(
+          child: Container(
+            color: Colors.black,
+            child: ListView.builder(
+              reverse: true,
+              itemBuilder: (BuildContext context, int index) {
+                // Get elements from last
+                index = (model.commandNumber - 1) - index;
+                return Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        child: Row(
+                          children: <Widget>[
+                            Text(
+                              "serverssh:~ ",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              model.shellCommands.elementAt(index),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        margin: EdgeInsets.only(left: 10.0),
+                        child: Text(
+                          model.shellResults.elementAt(index),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              itemCount: model.shellResults.length,
+            ),
           ),
-          Row(
+        ),
+        Container(
+          child: Row(
             children: <Widget>[
-              Container(
+              Expanded(
                 child: TextField(
-                  autocorrect: false,
-                  controller: _commandController,
-                  keyboardType: TextInputType.text,
+                  decoration:
+                      const InputDecoration(hintText: "Enter a command"),
+                  controller: _commandTextController,
                 ),
               ),
               RaisedButton(
-                child: Text("Run"),
-                onPressed: () => model.sendCommand(_commandController.value),
-              ),
+                  child: Text("Run cmd"),
+                  onPressed: () async {
+                    await model.sendCommand(_commandTextController.value);
+                  }),
             ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

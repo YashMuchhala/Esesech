@@ -7,7 +7,7 @@ class SshHelper {
   static const int _PORT = 22;
   static const String _PASSWORD = "ubuntu123";
 
-  static Future<String> execute(String host, String command) async {
+  static Future<String> execute(String command) async {
     SSHClient client = SSHClient(
       host: _HOST,
       username: _USERNAME,
@@ -26,27 +26,27 @@ class SshHelper {
     }
   }
 
-  static Future<String> writeToShell(String command) async {
-    SSHClient client = SSHClient(
-      host: _HOST,
-      username: _USERNAME,
-      port: _PORT,
-      passwordOrKey: _PASSWORD,
-    );
-    try {
-      var result = await client.startShell(
-        ptyType: "xterm",
-        callback: (dynamic res) {
-          print(res);
-        },
-      );
-      await client.writeToShell(command);
-      await client.closeShell();
-      return result;
-    } catch (e) {
-      print("SSH Exception Occurred: $e");
-      await client.closeShell();
-      return null;
-    }
-  }
+  // static Future<String> writeToShell(String command) async {
+  //   SSHClient client = SSHClient(
+  //     host: _HOST,
+  //     username: _USERNAME,
+  //     port: _PORT,
+  //     passwordOrKey: _PASSWORD,
+  //   );
+  //   try {
+  //     var result = await client.startShell(
+  //       ptyType: "xterm",
+  //       callback: (dynamic res) {
+  //         print(res);
+  //       },
+  //     );
+  //     await client.writeToShell(command);
+  //     await client.closeShell();
+  //     return result;
+  //   } catch (e) {
+  //     print("SSH Exception Occurred: $e");
+  //     await client.closeShell();
+  //     return null;
+  //   }
+  // }
 }
