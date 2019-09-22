@@ -9,6 +9,8 @@ class BaseViewModel extends ChangeNotifier {
 
   void setState(ViewModelState viewModelState) {
     _state = viewModelState;
-    notifyListeners();
+    try {
+      notifyListeners();
+    } catch (_) {}
   }
 }

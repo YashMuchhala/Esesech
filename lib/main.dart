@@ -12,10 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      color: Colors.black,
+      color: Colors.white,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(brightness: Brightness.dark),
-      initialRoute: '/home',
+      theme:
+          ThemeData(brightness: Brightness.light, accentColor: Colors.yellow, fontFamily: "Product Sans"),
+      initialRoute: '/',
       onGenerateRoute: Router.generateRoute,
     );
   }
