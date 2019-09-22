@@ -33,9 +33,17 @@ class _UserSettingsState extends State<UserSettings> {
         ),
       ),
       body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.4), BlendMode.dstATop),
+            image: AssetImage("assets/background.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
         padding: EdgeInsets.all(50.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
               "Name: ${widget.serverUser.name}",
@@ -55,43 +63,63 @@ class _UserSettingsState extends State<UserSettings> {
             ),
             Text(
               "Home Directory: ${widget.serverUser.homeDirectory}",
-              style: TextStyle(fontSize: 24),
+              style: TextStyle(fontSize: 22),
             ),
             FutureBuilder<String>(
                 future: getServerUserInfo(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     userStatus = snapshot.data;
-                    return Text(
-                      "Status: ${snapshot.data}" ?? "",
-                      style: TextStyle(fontSize: 24),
-                    );
+
+                    if (snapshot.data == "P") {
+                      return Text(
+                        "Status: Enabled user",
+                        style: TextStyle(fontSize: 24),
+                      );
+                    } else {
+                      return Text("Status: User disabled/locked");
+                    }
                   } else {
                     return Text("");
                   }
                 }),
             Expanded(
-                          child: GridView.count(
+              child: GridView.count(
                 crossAxisCount: 2,
                 padding: EdgeInsets.all(10.0),
-                childAspectRatio: 8.0 / 9.0,
+                childAspectRatio: 3.0,
                 children: <Widget>[
-                  RaisedButton(
-                    child: Text("Lock/Disable User"),
-                    onPressed: () => lockServerUser(),
-                    color: Colors.yellow,
+                  Container(
+                    padding: EdgeInsets.all(5.0),
+                    child: RaisedButton(
+                      child: Text("Disable User"),
+                      onPressed: () => lockServerUser(),
+                      color: Colors.yellow,
+                    ),
                   ),
-                  RaisedButton(
-                    child: Text("Unlock/Enable User"),
-                    onPressed: () => unlockServerUser(),
+                  Container(
+                    padding: EdgeInsets.all(5.0),
+                    child: RaisedButton(
+                      child: Text("Unlock User"),
+                      onPressed: () => unlockServerUser(),
+                      color: Colors.green,
+                    ),
                   ),
-                  RaisedButton(
-                    child: Text("Delete User"),
-                    onPressed: () => deleteServerUser(),
+                  Container(
+                    padding: EdgeInsets.all(5.0),
+                    child: RaisedButton(
+                      child: Text("Revoke Password", style: TextStyle(fontSize: 12),),
+                      onPressed: () => expireServerUserPassword(),
+                      color: Colors.blue,
+                    ),
                   ),
-                  RaisedButton(
-                    child: Text("Request Password Change"),
-                    onPressed: () => expireServerUserPassword(),
+                  Container(
+                    padding: EdgeInsets.all(5.0),
+                    child: RaisedButton(
+                      child: Text("Delete User"),
+                      onPressed: () => deleteServerUser(),
+                      color: Colors.red,
+                    ),
                   ),
                 ],
               ),
@@ -140,8 +168,8 @@ class _UserSettingsState extends State<UserSettings> {
   Future<void> lockServerUser() async {
     try {
       const String LOCK_USER = 'sudo passwd -l';
-      String _ =
-          await SSHService.execute(LOCK_USER + " " + widget.serverUser.username);
+      String _ = await SSHService.execute(
+          LOCK_USER + " " + widget.serverUser.username);
     } catch (e) {
       print("Error: $e");
     }

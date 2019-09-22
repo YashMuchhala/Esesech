@@ -1,7 +1,7 @@
 import 'package:ssh/ssh.dart';
 
 class SSHService {
-  static const String _HOST =
+  static const String HOST =
       "ec2-13-126-85-121.ap-south-1.compute.amazonaws.com";
   static const String _USERNAME = "ubuntu";
   static const int _PORT = 22;
@@ -9,7 +9,7 @@ class SSHService {
 
   static Future<String> execute(String command) async {
     SSHClient client = SSHClient(
-      host: _HOST,
+      host: HOST,
       username: _USERNAME,
       port: _PORT,
       passwordOrKey: _PASSWORD,
@@ -28,7 +28,7 @@ class SSHService {
 
   static Future<List<String>> executeMultiple(List<String> commands) async {
     SSHClient client = SSHClient(
-      host: _HOST,
+      host: HOST,
       username: _USERNAME,
       port: _PORT,
       passwordOrKey: _PASSWORD,

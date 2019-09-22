@@ -120,17 +120,18 @@ class _ShellViewState extends State<ShellView> {
                     : ButtonTheme(
                         minWidth: 100.0,
                         child: RaisedButton(
-                            color: Colors.yellow,
-                            child: Text("RUN",
-                                style: TextStyle(
-                                  fontFamily: "Ubuntu Mono",
-                                  fontSize: 16.0,
-                                )),
-                            onPressed: () async {
-                              await model
-                                  .sendCommand(_commandTextController.value);
-                                  _commandTextController.clear();
-                            }),
+                          color: Colors.yellow,
+                          child: Text("RUN",
+                              style: TextStyle(
+                                fontFamily: "Ubuntu Mono",
+                                fontSize: 16.0,
+                              )),
+                          onPressed: () async {
+                            await model
+                                .sendCommand(_commandTextController.value);
+                            _commandTextController.clear();
+                          },
+                        ),
                       ),
               ),
             ],

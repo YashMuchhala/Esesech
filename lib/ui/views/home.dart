@@ -1,4 +1,6 @@
+import 'package:esesech/core/constants/enums.dart';
 import 'package:esesech/core/constants/route_path.dart';
+import 'package:esesech/core/services/ssh.dart';
 import 'package:esesech/ui/widgets/user_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +33,7 @@ class HomeView extends StatelessWidget {
                       children: <Widget>[
                         Container(
                           child: Text(
-                            "ServerName",
+                            SSHService.HOST.substring(0, 30),
                             style: TextStyle(
                               color: Colors.black87,
                               fontFamily: "Product Sans",
@@ -39,13 +41,17 @@ class HomeView extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          child: Icon(Icons.arrow_drop_down, color: Colors.black87,size: 20.0,),
+                          child: Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black87,
+                            size: 20.0,
+                          ),
                         ),
                       ],
                     ),
                   ),
                   onTap: () {
-                    
+                    _showDialog(context);
                   }),
             ],
           ),
@@ -112,22 +118,25 @@ class HomeView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Container(
-                    height: 300.0,
-                    child: model.serverUserList.length == 0
-                        ? Container()
-                        : ListView.builder(
-                            itemCount: model.serverUserList.length,
-                            itemBuilder: (
-                              BuildContext context,
-                              int index,
-                            ) {
-                              return UserTile(
-                                user: model.serverUserList.elementAt(index),
-                              );
-                            },
-                          ),
-                  ),
+                  model.state == ViewModelState.Busy
+                      ? Center(child: CircularProgressIndicator())
+                      : Container(
+                          height: 300.0,
+                          child: model.serverUserList.length == 0
+                              ? Container()
+                              : ListView.builder(
+                                  itemCount: model.serverUserList.length,
+                                  itemBuilder: (
+                                    BuildContext context,
+                                    int index,
+                                  ) {
+                                    return UserTile(
+                                      user:
+                                          model.serverUserList.elementAt(index),
+                                    );
+                                  },
+                                ),
+                        ),
                 ],
               ),
             ),
@@ -159,6 +168,15 @@ class HomeView extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  void _showDialog(context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text("Servers"),
       ),
     );
   }
