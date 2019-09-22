@@ -19,9 +19,8 @@ class Router {
         return CupertinoPageRoute(builder: (_) => AddServerUserView());
       case RoutePath.SERVER_USER_SETTINGS:
         {
-          final ServerUser serverUser = settings.arguments;
           return MaterialPageRoute(
-            builder: (_) => UserSettings(serverUser: serverUser),
+            builder: (_) => UserSettingsView(),
           );
         }
       default:

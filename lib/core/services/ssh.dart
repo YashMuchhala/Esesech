@@ -1,6 +1,6 @@
 import 'package:ssh/ssh.dart';
 
-class SshHelper {
+class SSHService {
   static const String _HOST =
       "ec2-13-126-85-121.ap-south-1.compute.amazonaws.com";
   static const String _USERNAME = "ubuntu";

@@ -13,7 +13,7 @@ class HomeViewModel extends BaseViewModel {
     const String SERVER_USERS_COMMAND = "getent passwd {1000..60000}";
     setState(ViewModelState.Busy);
     try {
-      String result = await SshHelper.execute(SERVER_USERS_COMMAND);
+      String result = await SSHService.execute(SERVER_USERS_COMMAND);
       _parseShellAndGetStatus(result);
       setState(ViewModelState.Idle);
     } catch (e) {
@@ -21,7 +21,7 @@ class HomeViewModel extends BaseViewModel {
     }
   }
 
-  void _parseShellAndGetStatus(String result) async {
+  void _parseShellAndGetStatus(String result) {
     List<String> delimitedByColon = result.split(":");
     List<String> newHopefulString = [];
     String temp1 = "";

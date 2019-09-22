@@ -11,7 +11,7 @@ class UserTile extends StatelessWidget {
     return Container(
       child: GestureDetector(
         child: Container(
-          color: Colors.black12,
+          color: Colors.yellow,
           padding: EdgeInsets.all(10.0),
           child: Row(
             
@@ -20,7 +20,7 @@ class UserTile extends StatelessWidget {
               Container(
                 child: Text(
                   user.username,
-                  style: TextStyle(fontFamily: "Ubuntu Mono", fontSize: 18.0),
+                  style: TextStyle(fontFamily: "Ubuntu Mono", fontSize: 22.0),
                 ),
               ),
               Container(
