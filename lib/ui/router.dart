@@ -20,7 +20,7 @@ class Router {
       case RoutePath.SERVER_USER_SETTINGS:
         {
           return MaterialPageRoute(
-            builder: (_) => UserSettingsView(),
+            builder: (_) => UserSettings(),
           );
         }
       default:
