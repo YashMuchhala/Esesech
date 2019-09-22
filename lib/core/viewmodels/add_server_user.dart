@@ -21,7 +21,7 @@ class AddServerUserViewModel extends BaseViewModel {
 
       command += username;
 
-      String _ = await SshHelper.execute(command);
+      String _ = await SSHService.execute(command);
       setState(ViewModelState.Idle);
     } catch (e) {
       // print("Error: $e");

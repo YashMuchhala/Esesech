@@ -19,7 +19,7 @@ class ShellViewModel extends BaseViewModel {
     shellCommands.add(command);
 
     try {
-      String result = await SshHelper.execute(command);
+      String result = await SSHService.execute(command);
       shellResults.add(result);
       setState(ViewModelState.Idle);
     } catch (e) {

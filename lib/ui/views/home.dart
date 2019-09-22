@@ -22,6 +22,32 @@ class HomeView extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             backgroundColor: Colors.white,
+            actions: <Widget>[
+              GestureDetector(
+                  child: Container(
+                    padding: EdgeInsets.all(20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          child: Text(
+                            "ServerName",
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontFamily: "Product Sans",
+                            ),
+                          ),
+                        ),
+                        Container(
+                          child: Icon(Icons.arrow_drop_down, color: Colors.black87,size: 20.0,),
+                        ),
+                      ],
+                    ),
+                  ),
+                  onTap: () {
+                    
+                  }),
+            ],
           ),
           body: _buildUI(
             context,
@@ -42,6 +68,14 @@ class HomeView extends StatelessWidget {
 
   Widget _buildUI(BuildContext context, HomeViewModel model) {
     return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.4), BlendMode.dstATop),
+          image: AssetImage("assets/background.jpg"),
+          fit: BoxFit.cover,
+        ),
+      ),
       padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Column(
         children: <Widget>[
