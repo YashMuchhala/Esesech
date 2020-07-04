@@ -1,4 +1,4 @@
-# Esesech - A mobile client for SSH
+# Esesech: A mobile client for SSH
 
 A secure serverless SSH client that is cross-platform in Flutter with direct functions to administer users in a Linux based server.
 
