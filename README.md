@@ -1,16 +1,17 @@
-# esesech
+# Esesech - A mobile client for SSH
 
-A new Flutter project.
+A secure serverless SSH client that is cross-platform in Flutter with direct functions to administer users in a Linux based server.
 
-## Getting Started
+### Implementation Screenshots
 
-This project is a starting point for a Flutter application.
+1. Home Screen
+   ![Screenshot 1](https://raw.githubusercontent.com/yashmuchhala/Esesech/master/images/ss1.png "Screenshot 1")
 
-A few resources to get you started if this is your first Flutter project:
+2. Shell Screen
+   ![Screenshot 2](https://raw.githubusercontent.com/yashmuchhala/Esesech/master/images/ss2.png "Screenshot 2")
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+3. Add a user to the server (Implements SSH in background)
+   ![Screenshot 3](https://raw.githubusercontent.com/yashmuchhala/Esesech/master/images/ss3.png "Screenshot 3")
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+4. Manage a user
+   ![Screenshot 4](https://raw.githubusercontent.com/yashmuchhala/Esesech/master/images/ss4.png "Screenshot 4")
